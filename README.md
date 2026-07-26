@@ -6,67 +6,111 @@
 
 ## Project Overview
 
-ReFood Connect is a web application developed to reduce food wastage by connecting food donors with NGOs and volunteers. Restaurants, hotels, supermarkets, and event organizers can donate surplus food, while NGOs can request donations and volunteers can assist with collecting and delivering the food to those in need.
+ReFood Connect is a web-based platform developed to reduce food wastage by connecting food donors with NGOs and volunteers. Restaurants, hotels, supermarkets, event organizers, and other food providers can donate surplus edible food, while NGOs can request available donations and volunteers can assist with collection and delivery.
 
-The main goal of the project is to make food donation simple, transparent, and efficient.
+The project aims to simplify the food donation process and ensure that excess food reaches people in need instead of being wasted.
 
 ---
 
 ## Problem Statement
 
-Every day, a significant amount of edible food is discarded even though many people do not have access to sufficient meals. The absence of a centralized platform makes it difficult for donors, NGOs, and volunteers to coordinate food redistribution effectively. ReFood Connect addresses this problem by providing a common platform for all stakeholders.
+Food wastage is a major issue across the world. Every day, large quantities of edible food are discarded while many people struggle to access regular meals. Although many organizations are willing to donate surplus food, there is often no efficient system to connect donors with NGOs and volunteers in real time.
+
+ReFood Connect addresses this problem by providing a centralized platform where all stakeholders can coordinate food donations quickly and efficiently.
+
+---
+
+## Vision Statement
+
+To develop a reliable and user-friendly platform that minimizes food wastage by connecting food donors, NGOs, volunteers, and administrators through a single digital system, ultimately contributing to a more sustainable and hunger-free society.
+
+---
+
+## Target Users
+
+The application is designed for the following users:
+
+- **Food Donors** – Restaurants, hotels, supermarkets, bakeries, and event organizers.
+- **NGOs** – Organizations responsible for collecting and distributing donated food.
+- **Volunteers** – Individuals who assist in collecting and delivering food.
+- **Administrator** – Manages users, donations, and overall platform activities.
 
 ---
 
 ## Project Objectives
 
-- Minimize food wastage through timely redistribution.
-- Provide a platform for food donors to donate surplus food.
-- Enable NGOs to view and request available donations.
-- Allow volunteers to manage food pickup and delivery.
-- Track the complete donation process from donor to recipient.
-- Improve coordination between all users of the system.
+- Reduce food wastage through efficient redistribution.
+- Provide a simple platform for food donation.
+- Enable NGOs to discover and request available food.
+- Help volunteers manage pickup and delivery tasks.
+- Track the complete donation lifecycle.
+- Improve coordination among all stakeholders.
 
 ---
 
-## User Roles
-
-The system supports four different user roles:
-
-- **Food Donor** – Adds and manages food donations.
-- **NGO** – Requests and receives available food donations.
-- **Volunteer** – Collects food from donors and delivers it to NGOs.
-- **Administrator** – Monitors users, donations, and overall system activities.
-
----
-
-## Main Features
+## Key Features
 
 - Secure user registration and login
 - Food donation management
-- Donation browsing and acceptance
+- NGO donation request system
 - Volunteer assignment
 - Pickup and delivery tracking
-- Individual dashboards for each user role
+- Role-based dashboards
 - Donation history and status updates
+- Admin panel for monitoring users and donations
+
+---
+
+## Success Metrics
+
+The success of the project can be measured through:
+
+- Increase in successful food donations.
+- Reduction in food wastage.
+- Faster response time for food requests.
+- Active participation of donors, NGOs, and volunteers.
+- Positive user feedback regarding usability.
+
+---
+
+## Assumptions and Constraints
+
+### Assumptions
+
+- Food donors provide only safe and edible food.
+- NGOs and volunteers have internet access.
+- Users enter accurate information while registering and donating food.
+
+### Constraints
+
+- Internet connectivity is required to use the system.
+- The initial version focuses on local food redistribution.
+- Real-time GPS tracking is not included in the first release.
 
 ---
 
 ## Technology Stack
 
 ### Frontend
-- React.js
+
+- React.js (Vite)
 
 ### Backend
+
 - Node.js
 - Express.js
 
 ### Database
+
 - MySQL
+- Sequelize ORM
 
 ### Development Tools
+
+- Git
 - GitHub
 - Docker
+- Docker Compose
 - Figma
 - Draw.io
 - Visual Studio Code
@@ -79,15 +123,17 @@ The system supports four different user roles:
 ReFood-Connect/
 │
 ├── client/
+│   └── Dockerfile
 ├── server/
+│   └── Dockerfile
 ├── design/
 │   ├── diagrams/
 │   └── wireframes/
 ├── docs/
 ├── docker/
-├── Dockerfile
 ├── docker-compose.yml
 ├── README.md
+├── LICENSE
 └── .gitignore
 ```
 
@@ -95,24 +141,24 @@ ReFood-Connect/
 
 ## Branching Strategy
 
-This project follows the **GitHub Flow** workflow.
+This project follows the **GitHub Flow** branching model.
 
-- **main** – Contains the stable version of the project.
-- **feature/*** – Used for developing individual features.
+- **main** contains the stable version of the project.
+- **feature/** branches are created for implementing individual features.
 
-Examples:
+Example feature branches:
 
-- feature/login-page
+- feature/user-auth
 - feature/donor-dashboard
 - feature/volunteer-module
 
-Once a feature is completed and tested, it is merged into the **main** branch.
+Each feature is developed separately, tested, and then merged into the **main** branch.
 
 ---
 
 ## Project Documentation
 
-The project documentation is available inside the **docs** folder.
+The project documentation is available in the **docs** folder.
 
 It includes:
 
@@ -125,13 +171,9 @@ It includes:
 
 ## UI Design
 
-All Figma wireframes are stored in:
+The user interface was designed using **Figma**.
 
-```text
-design/wireframes/
-```
-
-These wireframes include:
+The wireframes include:
 
 - Login Page
 - Registration Page
@@ -140,33 +182,88 @@ These wireframes include:
 - Volunteer Dashboard
 - Admin Dashboard
 
+All design files are available in:
+
+```text
+design/wireframes/
+```
+
 ---
 
-## Local Development
+# Quick Start – Local Development
 
-Detailed setup instructions and Docker commands will be added after the development environment is configured.
+## Prerequisites
+
+Before running the project, install the following:
+
+- Git
+- Docker Desktop
+- Node.js (optional if running without Docker)
+
+---
+
+## Clone the Repository
+
+```bash
+git clone https://github.com/ChiragAsija1323/ReFood-Connect.git
+cd ReFood-Connect
+```
+
+---
+
+## Build Docker Images
+
+```bash
+docker compose build
+```
+
+---
+
+## Start the Application
+
+```bash
+docker compose up
+```
+
+---
+
+## Application URLs
+
+Frontend:
+
+```
+http://localhost:5173
+```
+
+Backend:
+
+```
+http://localhost:8000
+```
 
 ---
 
 ## Future Enhancements
 
-Some features planned for future versions include:
+Some planned improvements for future versions include:
 
 - Mobile application support
 - GPS-based pickup tracking
 - Push notifications
-- AI-assisted food matching
+- AI-based food matching
 - Reports and analytics dashboard
+- Email and SMS notifications
+- Real-time donation tracking
 
 ---
 
 ## Contributors
 
-**Chirag Asija**
-**Saanvi Gupta**
+- Chirag Asija
+- Saanvi Gupta
 
-VIT Chennai  
-B.Tech Computer Science and Engineering
+**VIT Chennai**  
+**B.Tech Computer Science and Engineering**
 
 ---
 
