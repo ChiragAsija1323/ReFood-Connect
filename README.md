@@ -55,8 +55,8 @@ docker compose up --build
 ---
 
 ## Contributors
-- Chirag Asija (24BDS1073)
 - Saanvi Gupta (24BDS1023)
+- Chirag Asija (24BDS1073)
 
 **VIT Chennai**  
 **B.Tech Computer Science and Engineering**
