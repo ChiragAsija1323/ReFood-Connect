@@ -30,6 +30,7 @@ The system is highly modular, dividing responsibilities into distinct layers. Ou
 **Why this style?**
 We chose a Layered Client-Server architecture because ReFood Connect requires multiple distinct user roles (Donors, NGOs, Volunteers, Admins) accessing a centralized data source. Separating the Presentation Layer (React) from the Application Layer (Express API) allows us to scale the frontend and backend independently. The layered backend ensures that security (Authentication), business rules (Services), and data persistence (ORM) are strictly segregated, preventing "spaghetti code."
 
+![Architecture Diagram](../design/diagrams/Architecture.png)
 *(Figure 1: ReFood Connect High-Level Architecture Diagram)*
 
 ---
@@ -37,12 +38,31 @@ We chose a Layered Client-Server architecture because ReFood Connect requires mu
 ## 3. User Interface Design
 
 The User Interface was designed in Figma following modern SaaS principles, focusing on clarity and reducing cognitive load for different user roles. 
-*(Login, Registration, Donor Dashboard, NGO Dashboard, Volunteer Dashboard, Admin Dashboard)*
 
 **How we made the UI user-friendly:**
 1. **Role-Based Dashboards:** Instead of one cluttered interface, the UI dynamically changes based on the user's role. A volunteer only sees "Available Pickups", while an NGO sees "Available Donations", preventing confusion.
 2. **Clear Visual Hierarchy:** We implemented a consistent 8px/16px/24px spacing grid and used a restrained color palette (ReFood Green #16A34A for primary actions) to guide the user's eye to important buttons like "Request Donation".
 3. **Visual State Tracking:** We used a step-by-step progress component for deliveries (Requested → Accepted → Picked Up → Delivered), allowing users to understand the status of a donation at a single glance.
+
+### UI Screens
+
+![Login Screen](../design/wireframes/Login.png)
+*(Figure 2: Authentication Login Screen)*
+
+![Registration Screen](../design/wireframes/Registration.png)
+*(Figure 3: Role-Based Registration Screen)*
+
+![Food Donor Dashboard](../design/wireframes/FoodDonorDashboard.png)
+*(Figure 4: Food Donor Dashboard)*
+
+![NGO Dashboard](../design/wireframes/NGODashboard.png)
+*(Figure 5: NGO Dashboard)*
+
+![Volunteer Dashboard](../design/wireframes/VolunteerDashboard.png)
+*(Figure 6: Volunteer Dashboard)*
+
+![Admin Dashboard](../design/wireframes/AdminDashboard.png)
+*(Figure 7: Administrator Dashboard)*
 
 ---
 
