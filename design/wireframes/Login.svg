@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="100%" height="100%" fill="#f4f4f9" />
+  <rect x="200" y="100" width="400" height="400" fill="#ffffff" rx="10" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.1))" />
+  <text x="400" y="160" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#28a745" text-anchor="middle">ReFood Connect</text>
+  <text x="400" y="210" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#333" text-anchor="middle">Login to your account</text>
+  
+  <text x="250" y="270" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#555">Email</text>
+  <rect x="250" y="280" width="300" height="40" fill="#fff" stroke="#ccc" rx="4" />
+  <text x="260" y="305" font-family="Arial, sans-serif" font-size="14" fill="#999">Enter your email</text>
+
+  <text x="250" y="350" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#555">Password</text>
+  <rect x="250" y="360" width="300" height="40" fill="#fff" stroke="#ccc" rx="4" />
+  <text x="260" y="385" font-family="Arial, sans-serif" font-size="14" fill="#999">••••••••</text>
+
+  <rect x="250" y="430" width="300" height="40" fill="#28a745" rx="4" />
+  <text x="400" y="455" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">Login</text>
+</svg>

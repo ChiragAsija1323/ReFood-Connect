@@ -2,23 +2,38 @@ services:
   client:
     build:
       context: ./client
-    container_name: refood-client
+    container_name: refood-client-da2
     ports:
       - "5173:5173"
-    volumes:
-      - ./client:/app
-      - /app/node_modules
     depends_on:
       - server
 
   server:
     build:
       context: ./server
-    container_name: refood-server
+    container_name: refood-server-da2
     ports:
       - "8000:8000"
-    volumes:
-      - ./server:/app
-      - /app/node_modules
     env_file:
       - ./server/.env
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql:8.0
+    container_name: refood-db-da2
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: refood_connect
+      MYSQL_USER: refood_user
+      MYSQL_PASSWORD: refood_password
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+volumes:
+  db_data:

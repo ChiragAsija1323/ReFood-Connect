@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReFood Connect - Figma Import Source</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: { 
+                        primary: '#16A34A', 
+                        primaryDark: '#15803d',
+                        primaryLight: '#dcfce7',
+                        bgMain: '#F9FAFB',
+                        surface: '#FFFFFF',
+                        textMain: '#1f2937',
+                        textSecondary: '#6b7280',
+                        borderLight: '#e5e7eb'
+                    },
+                    boxShadow: { 'subtle': '0 2px 8px rgba(16, 24, 40, 0.06)' }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #e5e7eb; padding: 60px; display: flex; flex-direction: column; gap: 80px; align-items: center; }
+        .section-title { font-size: 32px; font-weight: 700; color: #1f2937; width: 1440px; text-align: left; margin-bottom: -40px; }
+        
+        .screen-container, .auth-container { width: 1440px; height: 900px; background: #F9FAFB; overflow: hidden; display: flex; position: relative; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-radius: 12px; }
+        
+        .sidebar { width: 260px; background: #FFFFFF; border-right: 1px solid #e5e7eb; display: flex; flex-direction: column; }
+        .sidebar-logo { height: 72px; display: flex; align-items: center; padding: 0 24px; border-bottom: 1px solid #e5e7eb; font-weight: 700; font-size: 20px; color: #1f2937; }
+        .nav-item { display: flex; align-items: center; padding: 12px 24px; color: #6b7280; font-weight: 500; font-size: 15px; gap: 12px; margin: 4px 12px; border-radius: 8px; }
+        .nav-item.active { background: #dcfce7; color: #16A34A; }
+        
+        .main-wrapper { flex: 1; display: flex; flex-direction: column; }
+        .topbar { height: 72px; background: #FFFFFF; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; padding: 0 32px; }
+        .content-area { padding: 32px; flex: 1; overflow-y: auto; }
+        
+        .card { background: #FFFFFF; border: 1px solid #e5e7eb; border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(16, 24, 40, 0.06); }
+        .stat-card { display: flex; flex-direction: column; gap: 12px; }
+        .stat-value { font-size: 32px; font-weight: 700; color: #1f2937; }
+        .stat-label { font-size: 14px; font-weight: 500; color: #6b7280; }
+        
+        .badge { padding: 4px 12px; border-radius: 999px; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+        .badge-available { background: #dcfce7; color: #166534; }
+        .badge-requested { background: #fef08a; color: #854d0e; }
+        .badge-accepted { background: #dbeafe; color: #1e40af; }
+        .badge-delivered { background: #f3f4f6; color: #374151; }
+        
+        .btn-primary { background: #16A34A; color: white; padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 15px; }
+        .btn-outline { border: 1px solid #d1d5db; color: #374151; padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 15px; background: white; }
+        
+        .input-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
+        .input-group label { font-size: 14px; font-weight: 500; color: #374151; }
+        .input-group input, .input-group select { padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 15px; color: #1f2937; }
+
+        .ds-container { width: 1440px; background: #FFFFFF; border-radius: 12px; padding: 40px; box-shadow: 0 2px 8px rgba(16, 24, 40, 0.06); }
+    </style>
+</head>
+<body>
+
+    <h2 class="section-title">SECTION 1: Design System</h2>
+    <!-- DESIGN SYSTEM FRAME -->
+    <div class="ds-container flex flex-col gap-12">
+        <div>
+            <h3 class="text-2xl font-bold mb-4">Colors</h3>
+            <div class="flex gap-4">
+                <div class="w-24 h-24 bg-primary rounded-lg border flex items-end p-2 text-white text-xs font-bold shadow-sm">Primary</div>
+                <div class="w-24 h-24 bg-textMain rounded-lg border flex items-end p-2 text-white text-xs font-bold shadow-sm">Text Dark</div>
+                <div class="w-24 h-24 bg-textSecondary rounded-lg border flex items-end p-2 text-white text-xs font-bold shadow-sm">Text Muted</div>
+                <div class="w-24 h-24 bg-bgMain rounded-lg border flex items-end p-2 text-textMain text-xs font-bold shadow-sm">Background</div>
+                <div class="w-24 h-24 bg-borderLight rounded-lg border flex items-end p-2 text-textMain text-xs font-bold shadow-sm">Border</div>
+            </div>
+        </div>
+        <div>
+            <h3 class="text-2xl font-bold mb-4">Typography (Inter)</h3>
+            <div class="space-y-4">
+                <div class="text-4xl font-bold">Heading 1 - 36px Bold</div>
+                <div class="text-3xl font-bold">Heading 2 - 30px Bold</div>
+                <div class="text-xl font-semibold">Heading 3 - 20px SemiBold</div>
+                <div class="text-base">Body - 16px Regular</div>
+                <div class="text-sm font-medium text-textSecondary">Caption - 14px Medium</div>
+            </div>
+        </div>
+        <div class="flex gap-16">
+            <div>
+                <h3 class="text-2xl font-bold mb-4">Buttons</h3>
+                <div class="flex gap-4"><button class="btn-primary">Primary Button</button><button class="btn-outline">Secondary Button</button></div>
+            </div>
+            <div>
+                <h3 class="text-2xl font-bold mb-4">Status Badges</h3>
+                <div class="flex gap-4">
+                    <span class="badge badge-available">Available</span>
+                    <span class="badge badge-requested">Requested</span>
+                    <span class="badge badge-accepted">Accepted</span>
+                    <span class="badge badge-delivered">Delivered</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="section-title">SECTION 2: Authentication</h2>
+    <!-- SCREEN 1: LOGIN -->
+    <div class="auth-container bg-white">
+        <div class="w-1/2 bg-primaryLight flex flex-col justify-center p-16">
+            <div class="flex items-center gap-3 mb-8">
+                <i data-lucide="leaf" class="text-primary w-10 h-10"></i>
+                <h1 class="text-3xl font-bold text-textMain">ReFood Connect</h1>
+            </div>
+            <h2 class="text-4xl font-bold text-textMain leading-tight mb-4">Good food deserves <br>a second chance.</h2>
+            <p class="text-lg text-textSecondary font-medium max-w-md mb-12">ReFood Connect helps donors, NGOs, and volunteers work together to rescue surplus food and deliver it to communities that need it.</p>
+            
+            <div class="flex gap-12">
+                <div><div class="text-3xl font-bold text-primaryDark mb-1">1,240+</div><div class="text-sm font-semibold text-textSecondary">Meals rescued</div></div>
+                <div><div class="text-3xl font-bold text-primaryDark mb-1">850+</div><div class="text-sm font-semibold text-textSecondary">Donations</div></div>
+                <div><div class="text-3xl font-bold text-primaryDark mb-1">142</div><div class="text-sm font-semibold text-textSecondary">Community members</div></div>
+            </div>
+        </div>
+        <div class="w-1/2 flex flex-col justify-center px-32">
+            <h2 class="text-3xl font-bold text-textMain mb-3">Welcome back</h2>
+            <p class="text-textSecondary mb-10 text-lg">Please enter your details to sign in.</p>
+            <form>
+                <div class="input-group"><label>Email</label><input type="email" placeholder="Enter your email"></div>
+                <div class="input-group relative"><label>Password</label><input type="password" placeholder="••••••••"><i data-lucide="eye" class="absolute right-4 top-10 text-gray-400 w-5 h-5"></i></div>
+                <div class="flex justify-between items-center mb-8">
+                    <label class="flex items-center gap-2 text-sm text-textSecondary font-medium"><input type="checkbox" class="rounded h-4 w-4 border-gray-300"> Remember me</label>
+                    <a href="#" class="text-sm font-semibold text-primary">Forgot password?</a>
+                </div>
+                <button class="btn-primary w-full py-3 mb-8 text-lg">Login</button>
+                <p class="text-center text-textSecondary font-medium">Don't have an account? <a href="#" class="text-primary font-semibold">Register</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- SCREEN 2: REGISTRATION -->
+    <div class="auth-container bg-white">
+        <div class="w-1/2 bg-primaryLight flex flex-col justify-center p-16">
+            <div class="flex items-center gap-3 mb-8"><i data-lucide="leaf" class="text-primary w-10 h-10"></i><h1 class="text-3xl font-bold text-textMain">ReFood Connect</h1></div>
+            <h2 class="text-4xl font-bold text-textMain leading-tight mb-4">Good food deserves <br>a second chance.</h2>
+            <p class="text-lg text-textSecondary font-medium max-w-md mb-12">ReFood Connect helps donors, NGOs, and volunteers work together to rescue surplus food and deliver it to communities that need it.</p>
+        </div>
+        <div class="w-1/2 flex flex-col justify-center px-32">
+            <h2 class="text-3xl font-bold text-textMain mb-3">Create your account</h2>
+            <p class="text-textSecondary mb-8 text-lg">Join the ReFood Connect community.</p>
+            <form>
+                <div class="input-group mb-4"><label>Full Name</label><input type="text"></div>
+                <div class="input-group mb-4"><label>Email</label><input type="email"></div>
+                <div class="flex gap-4 mb-4">
+                    <div class="input-group flex-1 mb-0"><label>Password</label><input type="password"></div>
+                    <div class="input-group flex-1 mb-0"><label>Confirm Password</label><input type="password"></div>
+                </div>
+                <div class="input-group mb-8"><label>Role</label><select><option>Food Donor</option><option>NGO</option><option>Volunteer</option><option>Beneficiary</option></select></div>
+                <button class="btn-primary w-full py-3 mb-8 text-lg">Create Account</button>
+                <p class="text-center text-textSecondary font-medium">Already have an account? <a href="#" class="text-primary font-semibold">Login</a></p>
+            </form>
+        </div>
+    </div>
+
+    <h2 class="section-title">SECTION 3: Dashboards</h2>
+    <!-- SCREEN 3: FOOD DONOR DASHBOARD -->
+    <div class="screen-container">
+        <div class="sidebar">
+            <div class="sidebar-logo"><i data-lucide="leaf" class="text-primary mr-2 w-6 h-6"></i> ReFood Connect</div>
+            <div class="flex-1 py-4">
+                <div class="nav-item active"><i data-lucide="layout-dashboard" class="w-5 h-5"></i> Dashboard</div>
+                <div class="nav-item"><i data-lucide="package" class="w-5 h-5"></i> My Donations</div>
+                <div class="nav-item"><i data-lucide="plus-circle" class="w-5 h-5"></i> Create Donation</div>
+                <div class="nav-item"><i data-lucide="history" class="w-5 h-5"></i> Donation History</div>
+                <div class="nav-item"><i data-lucide="bell" class="w-5 h-5"></i> Notifications</div>
+            </div>
+            <div class="p-4 border-t border-borderLight"><div class="nav-item"><i data-lucide="settings" class="w-5 h-5"></i> Settings</div><div class="nav-item text-red-600"><i data-lucide="log-out" class="w-5 h-5"></i> Log out</div></div>
+        </div>
+        <div class="main-wrapper">
+            <div class="topbar">
+                <div class="text-lg font-semibold text-textMain">Food Donor Portal</div>
+                <div class="flex items-center gap-5">
+                    <i data-lucide="bell" class="w-6 h-6 text-textSecondary"></i>
+                    <div class="flex items-center gap-3 border-l border-borderLight pl-5">
+                        <div class="w-9 h-9 rounded-full bg-primaryLight text-primaryDark flex items-center justify-center font-bold text-sm">CR</div>
+                        <div><div class="font-semibold text-sm text-textMain">City Restaurant</div><div class="text-xs text-textSecondary font-medium">Food Donor</div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-area">
+                <div class="mb-8"><h1 class="text-3xl font-bold text-textMain mb-2">Good morning, City Restaurant</h1><p class="text-textSecondary text-lg">Manage your surplus food donations and help reduce food waste.</p></div>
+                <div class="grid grid-cols-4 gap-6 mb-8">
+                    <div class="card stat-card"><div class="flex justify-between items-start"><span class="stat-label">Active Donations</span><i data-lucide="package" class="w-5 h-5 text-primary"></i></div><span class="stat-value">3</span></div>
+                    <div class="card stat-card"><div class="flex justify-between items-start"><span class="stat-label">Meals Donated</span><i data-lucide="utensils" class="w-5 h-5 text-blue-600"></i></div><span class="stat-value">850</span></div>
+                    <div class="card stat-card"><div class="flex justify-between items-start"><span class="stat-label">Pending Requests</span><i data-lucide="clock" class="w-5 h-5 text-yellow-600"></i></div><span class="stat-value">1</span></div>
+                    <div class="card stat-card"><div class="flex justify-between items-start"><span class="stat-label">Completed</span><i data-lucide="check-circle" class="w-5 h-5 text-gray-600"></i></div><span class="stat-value">42</span></div>
+                </div>
+                <div class="grid grid-cols-3 gap-8">
+                    <div class="col-span-1 card">
+                        <h2 class="text-xl font-semibold text-textMain mb-6">Create a Donation</h2>
+                        <form>
+                            <div class="input-group"><label>Food Details</label><input type="text" value="Vegetable Biryani"></div>
+                            <div class="flex gap-4">
+                                <div class="input-group flex-1"><label>Quantity</label><input type="number" value="20"></div>
+                                <div class="input-group flex-1"><label>Unit</label><select><option>Meals</option></select></div>
+                            </div>
+                            <div class="input-group"><label>Expiry Date & Time</label><input type="datetime-local" value="2026-09-11T20:00"></div>
+                            <div class="input-group"><label>Pickup Location</label><input type="text" value="Main Branch, Chennai"></div>
+                            <button class="btn-primary w-full mt-4">Publish Donation</button>
+                        </form>
+                    </div>
+                    <div class="col-span-2 card">
+                        <h2 class="text-xl font-semibold text-textMain mb-6">My Recent Donations</h2>
+                        <table class="w-full text-left border-collapse">
+                            <thead><tr class="text-sm text-textSecondary border-b border-borderLight"><th class="pb-4 font-semibold">Food Item</th><th class="pb-4 font-semibold">Quantity</th><th class="pb-4 font-semibold">Expiry Time</th><th class="pb-4 font-semibold">Status</th></tr></thead>
+                            <tbody class="text-sm">
+                                <tr class="border-b border-gray-50"><td class="py-5 font-semibold text-textMain">Vegetable Biryani</td><td class="py-5 text-textSecondary">20 meals</td><td class="py-5 text-textSecondary">Today, 8:00 PM</td><td class="py-5"><span class="badge badge-available">Available</span></td></tr>
+                                <tr class="border-b border-gray-50"><td class="py-5 font-semibold text-textMain">Assorted Breads</td><td class="py-5 text-textSecondary">50 items</td><td class="py-5 text-textSecondary">Today, 5:00 PM</td><td class="py-5"><span class="badge badge-requested">Requested</span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCREEN 4: NGO DASHBOARD -->
+    <div class="screen-container">
+        <div class="sidebar">
+            <div class="sidebar-logo"><i data-lucide="leaf" class="text-primary mr-2 w-6 h-6"></i> ReFood Connect</div>
+            <div class="flex-1 py-4">
+                <div class="nav-item active"><i data-lucide="layout-dashboard" class="w-5 h-5"></i> Dashboard</div>
+                <div class="nav-item"><i data-lucide="search" class="w-5 h-5"></i> Available Donations</div>
+                <div class="nav-item"><i data-lucide="clipboard-list" class="w-5 h-5"></i> My Requests</div>
+                <div class="nav-item"><i data-lucide="truck" class="w-5 h-5"></i> Deliveries</div>
+                <div class="nav-item"><i data-lucide="bell" class="w-5 h-5"></i> Notifications</div>
+            </div>
+            <div class="p-4 border-t border-borderLight"><div class="nav-item"><i data-lucide="settings" class="w-5 h-5"></i> Settings</div><div class="nav-item text-red-600"><i data-lucide="log-out" class="w-5 h-5"></i> Log out</div></div>
+        </div>
+        <div class="main-wrapper">
+            <div class="topbar">
+                <div class="text-lg font-semibold text-textMain">NGO Portal</div>
+                <div class="flex items-center gap-5">
+                    <i data-lucide="bell" class="w-6 h-6 text-textSecondary"></i>
+                    <div class="flex items-center gap-3 border-l border-borderLight pl-5">
+                        <div class="w-9 h-9 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-sm">HF</div>
+                        <div><div class="font-semibold text-sm text-textMain">Hope Foundation</div><div class="text-xs text-textSecondary font-medium">NGO</div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-area">
+                <div class="mb-8"><h1 class="text-3xl font-bold text-textMain mb-2">Welcome back, Hope Foundation</h1><p class="text-textSecondary text-lg">Find available food donations for the communities you support.</p></div>
+                <div class="grid grid-cols-4 gap-6 mb-8">
+                    <div class="card stat-card"><div class="flex justify-between items-start"><span class="stat-label">Available Donations</span><i data-lucide="search" class="w-5 h-5 text-primary"></i></div><span class="stat-value">12</span></div>
+                    <div class="card stat-card"><div class="flex justify-between items-start"><span class="stat-label">My Requests</span><i data-lucide="clipboard-list" class="w-5 h-5 text-blue-600"></i></div><span class="stat-value">4</span></div>
+                    <div class="card stat-card"><div class="flex justify-between items-start"><span class="stat-label">Active Deliveries</span><i data-lucide="truck" class="w-5 h-5 text-yellow-600"></i></div><span class="stat-value">2</span></div>
+                    <div class="card stat-card"><div class="flex justify-between items-start"><span class="stat-label">Meals Received</span><i data-lucide="utensils" class="w-5 h-5 text-green-600"></i></div><span class="stat-value">1,240</span></div>
+                </div>
+
+                <h2 class="text-xl font-semibold text-textMain mb-4">Available Food Donations</h2>
+                <div class="flex gap-4 mb-6">
+                    <div class="relative flex-1"><i data-lucide="search" class="absolute left-4 top-3.5 w-5 h-5 text-gray-400"></i><input type="text" placeholder="Search donations..." class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg outline-none"></div>
+                    <select class="border border-gray-300 rounded-lg px-4 py-3 outline-none"><option>Expiry</option></select>
+                    <select class="border border-gray-300 rounded-lg px-4 py-3 outline-none"><option>Quantity</option></select>
+                    <select class="border border-gray-300 rounded-lg px-4 py-3 outline-none"><option>Food Type</option></select>
+                </div>
+
+                <div class="grid grid-cols-3 gap-6 mb-10">
+                    <div class="card flex flex-col justify-between">
+                        <div class="mb-6">
+                            <h3 class="font-bold text-lg text-textMain mb-1">Vegetable Biryani</h3>
+                            <p class="text-textSecondary mb-4">20 meals</p>
+                            <div class="space-y-2 text-sm text-textSecondary">
+                                <p><span class="font-semibold text-textMain">Donor:</span> City Restaurant</p>
+                                <p><span class="font-semibold text-textMain">Pickup:</span> Main Branch, Chennai</p>
+                                <p><span class="font-semibold text-textMain">Expires:</span> Today, 8:00 PM</p>
+                                <p><span class="font-semibold text-textMain">Status:</span> <span class="badge badge-available ml-2">Available</span></p>
+                            </div>
+                        </div>
+                        <button class="btn-primary w-full">Request Donation</button>
+                    </div>
+                    <div class="card flex flex-col justify-between">
+                        <div class="mb-6">
+                            <h3 class="font-bold text-lg text-textMain mb-1">Assorted Breads</h3>
+                            <p class="text-textSecondary mb-4">50 items</p>
+                            <div class="space-y-2 text-sm text-textSecondary">
+                                <p><span class="font-semibold text-textMain">Donor:</span> Grand Hotel</p>
+                                <p><span class="font-semibold text-textMain">Pickup:</span> T. Nagar, Chennai</p>
+                                <p><span class="font-semibold text-textMain">Expires:</span> Today, 5:00 PM</p>
+                                <p><span class="font-semibold text-textMain">Status:</span> <span class="badge badge-available ml-2">Available</span></p>
+                            </div>
+                        </div>
+                        <button class="btn-primary w-full">Request Donation</button>
+                    </div>
+                </div>
+
+                <h2 class="text-xl font-semibold text-textMain mb-4">My Recent Requests</h2>
+                <table class="w-full text-left border-collapse bg-white border border-e5e7eb rounded-lg overflow-hidden">
+                    <thead><tr class="text-sm text-textSecondary border-b border-borderLight"><th class="py-4 px-6 font-semibold">Food</th><th class="py-4 px-6 font-semibold">Quantity</th><th class="py-4 px-6 font-semibold">Status</th></tr></thead>
+                    <tbody class="text-sm">
+                        <tr class="border-b border-gray-50"><td class="py-4 px-6 font-semibold text-textMain">Chicken Curry</td><td class="py-4 px-6 text-textSecondary">15 meals</td><td class="py-4 px-6"><span class="badge badge-requested">Requested</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCREEN 5: VOLUNTEER DASHBOARD -->
+    <div class="screen-container">
+        <div class="sidebar">
+            <div class="sidebar-logo"><i data-lucide="leaf" class="text-primary mr-2 w-6 h-6"></i> ReFood Connect</div>
+            <div class="flex-1 py-4">
+                <div class="nav-item active"><i data-lucide="layout-dashboard" class="w-5 h-5"></i> Dashboard</div>
+                <div class="nav-item"><i data-lucide="map" class="w-5 h-5"></i> Available Pickups</div>
+                <div class="nav-item"><i data-lucide="truck" class="w-5 h-5"></i> My Deliveries</div>
+                <div class="nav-item"><i data-lucide="history" class="w-5 h-5"></i> Delivery History</div>
+                <div class="nav-item"><i data-lucide="bell" class="w-5 h-5"></i> Notifications</div>
+            </div>
+            <div class="p-4 border-t border-borderLight"><div class="nav-item"><i data-lucide="settings" class="w-5 h-5"></i> Settings</div><div class="nav-item text-red-600"><i data-lucide="log-out" class="w-5 h-5"></i> Log out</div></div>
+        </div>
+        <div class="main-wrapper">
+            <div class="topbar">
+                <div class="text-lg font-semibold text-textMain">Volunteer Portal</div>
+                <div class="flex items-center gap-5">
+                    <i data-lucide="bell" class="w-6 h-6 text-textSecondary"></i>
+                    <div class="flex items-center gap-3 border-l border-borderLight pl-5">
+                        <div class="w-9 h-9 rounded-full bg-orange-100 text-orange-700 flex items-center justify-center font-bold text-sm">JD</div>
+                        <div><div class="font-semibold text-sm text-textMain">John Doe</div><div class="text-xs text-textSecondary font-medium">Volunteer</div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-area">
+                <div class="mb-8"><h1 class="text-3xl font-bold text-textMain mb-2">Hello, John</h1><p class="text-textSecondary text-lg">Help move surplus food from donors to organizations that need it.</p></div>
+                
+                <div class="grid grid-cols-4 gap-6 mb-8">
+                    <div class="card stat-card"><div class="flex justify-between items-start"><span class="stat-label">Available Pickups</span><i data-lucide="map" class="w-5 h-5 text-primary"></i></div><span class="stat-value">5</span></div>
+                    <div class="card stat-card"><div class="flex justify-between items-start"><span class="stat-label">Active Deliveries</span><i data-lucide="truck" class="w-5 h-5 text-blue-600"></i></div><span class="stat-value">1</span></div>
+                    <div class="card stat-card"><div class="flex justify-between items-start"><span class="stat-label">Completed Deliveries</span><i data-lucide="check-circle" class="w-5 h-5 text-gray-600"></i></div><span class="stat-value">28</span></div>
+                    <div class="card stat-card"><div class="flex justify-between items-start"><span class="stat-label">Meals Delivered</span><i data-lucide="heart" class="w-5 h-5 text-red-600"></i></div><span class="stat-value">560</span></div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-8">
+                    <div class="card">
+                        <h2 class="text-xl font-semibold text-textMain mb-6">Available Pickups</h2>
+                        <div class="border border-gray-200 rounded-lg p-5 mb-4 hover:border-primary transition cursor-pointer">
+                            <h3 class="font-bold text-lg text-textMain mb-1">Vegetable Biryani</h3>
+                            <p class="text-textSecondary mb-4">20 meals</p>
+                            <div class="bg-bgMain p-4 rounded-md mb-4 space-y-3">
+                                <div><span class="text-xs font-bold text-textSecondary uppercase tracking-wider block mb-1">Pickup from:</span><span class="font-medium">City Restaurant</span><br><span class="text-sm text-textSecondary">Main Branch, Chennai</span></div>
+                                <div><span class="text-xs font-bold text-textSecondary uppercase tracking-wider block mb-1">Deliver to:</span><span class="font-medium">Hope Foundation</span><br><span class="text-sm text-textSecondary">Anna Nagar, Chennai</span></div>
+                            </div>
+                            <div class="flex justify-between items-center mb-4"><span class="font-semibold text-sm">Status:</span><span class="badge badge-requested">Requested</span></div>
+                            <button class="btn-primary w-full">Accept Pickup</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h2 class="text-xl font-semibold text-textMain mb-6">My Active Delivery</h2>
+                        <div class="mb-8">
+                            <h3 class="font-bold text-lg text-textMain">Assorted Breads</h3>
+                            <p class="text-textSecondary">50 items</p>
+                        </div>
+                        
+                        <!-- Progress Component -->
+                        <div class="flex items-center justify-between mb-12 relative px-4">
+                            <div class="absolute left-8 right-8 top-1/2 h-1 bg-borderLight -translate-y-1/2 z-0"></div>
+                            <div class="absolute left-8 w-1/3 top-1/2 h-1 bg-blue-600 -translate-y-1/2 z-0"></div>
+                            
+                            <div class="flex flex-col items-center gap-2 z-10 w-16">
+                                <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center"><i data-lucide="check" class="w-4 h-4"></i></div>
+                                <span class="text-xs font-semibold text-blue-600">Requested</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2 z-10 w-16">
+                                <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center"><i data-lucide="check" class="w-4 h-4"></i></div>
+                                <span class="text-xs font-semibold text-blue-600">Accepted</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2 z-10 w-16">
+                                <div class="w-8 h-8 rounded-full bg-white border-2 border-gray-300"></div>
+                                <span class="text-xs font-medium text-gray-500">Picked Up</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2 z-10 w-16">
+                                <div class="w-8 h-8 rounded-full bg-white border-2 border-gray-300"></div>
+                                <span class="text-xs font-medium text-gray-500">Delivered</span>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <button class="btn-primary flex-1 py-3 text-center justify-center">Mark as Picked Up</button>
+                            <button class="btn-outline flex-1 py-3 text-center justify-center opacity-50 cursor-not-allowed">Mark as Delivered</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCREEN 6: ADMIN DASHBOARD -->
+    <div class="screen-container">
+        <div class="sidebar">
+            <div class="sidebar-logo"><i data-lucide="leaf" class="text-primary mr-2 w-6 h-6"></i> ReFood Connect</div>
+            <div class="flex-1 py-4">
+                <div class="nav-item active"><i data-lucide="pie-chart" class="w-5 h-5"></i> Overview</div>
+                <div class="nav-item"><i data-lucide="users" class="w-5 h-5"></i> Users</div>
+                <div class="nav-item"><i data-lucide="package" class="w-5 h-5"></i> Donations</div>
+                <div class="nav-item"><i data-lucide="shield-check" class="w-5 h-5"></i> Verifications</div>
+                <div class="nav-item"><i data-lucide="bar-chart-2" class="w-5 h-5"></i> Reports</div>
+                <div class="nav-item"><i data-lucide="bell" class="w-5 h-5"></i> Notifications</div>
+            </div>
+            <div class="p-4 border-t border-borderLight"><div class="nav-item"><i data-lucide="settings" class="w-5 h-5"></i> Settings</div><div class="nav-item text-red-600"><i data-lucide="log-out" class="w-5 h-5"></i> Log out</div></div>
+        </div>
+        <div class="main-wrapper">
+            <div class="topbar">
+                <div class="text-lg font-semibold text-textMain">System Administrator</div>
+                <div class="flex items-center gap-3"><div class="w-9 h-9 rounded-full bg-gray-800 text-white flex items-center justify-center font-bold text-sm">AD</div></div>
+            </div>
+            <div class="content-area">
+                <div class="mb-8"><h1 class="text-3xl font-bold text-textMain mb-2">Admin Overview</h1><p class="text-textSecondary text-lg">Monitor ReFood Connect activity and manage platform operations.</p></div>
+                
+                <div class="grid grid-cols-4 gap-6 mb-8">
+                    <div class="card stat-card"><div class="flex justify-between items-start"><span class="stat-label">Total Users</span><i data-lucide="users" class="w-5 h-5 text-indigo-600"></i></div><span class="stat-value">142</span></div>
+                    <div class="card stat-card"><div class="flex justify-between items-start"><span class="stat-label">Total Donations</span><i data-lucide="package" class="w-5 h-5 text-primary"></i></div><span class="stat-value">850</span></div>
+                    <div class="card stat-card"><div class="flex justify-between items-start"><span class="stat-label">Meals Redistributed</span><i data-lucide="heart" class="w-5 h-5 text-red-600"></i></div><span class="stat-value">12,450</span></div>
+                    <div class="card stat-card"><div class="flex justify-between items-start"><span class="stat-label">Active Deliveries</span><i data-lucide="truck" class="w-5 h-5 text-yellow-600"></i></div><span class="stat-value">8</span></div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-8">
+                    <div class="card">
+                        <h2 class="text-xl font-semibold text-textMain mb-6">Pending Verifications</h2>
+                        <table class="w-full text-left border-collapse">
+                            <thead><tr class="text-sm text-textSecondary border-b border-borderLight"><th class="pb-3 font-semibold">Organization</th><th class="pb-3 font-semibold">Type</th><th class="pb-3 font-semibold">Status</th><th class="pb-3 font-semibold text-right">Action</th></tr></thead>
+                            <tbody class="text-sm">
+                                <tr class="border-b border-gray-50"><td class="py-4 font-semibold text-textMain">Helping Hands</td><td class="py-4 text-textSecondary">NGO</td><td class="py-4">Pending</td><td class="py-4 text-right"><button class="text-primary font-semibold">Review</button></td></tr>
+                                <tr><td class="py-4 font-semibold text-textMain">Grand Hotel</td><td class="py-4 text-textSecondary">Food Donor</td><td class="py-4">Pending</td><td class="py-4 text-right"><button class="text-primary font-semibold">Review</button></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card">
+                        <h2 class="text-xl font-semibold text-textMain mb-6">Recent Platform Activity</h2>
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="bg-gray-100 p-2 rounded-full"><i data-lucide="check" class="w-4 h-4"></i></div>
+                                <div><p class="text-sm text-textMain font-semibold mb-1">Donation marked as delivered</p><p class="text-sm text-textSecondary">John Doe delivered Vegetable Biryani to Hope Foundation.</p><span class="text-xs text-gray-400 mt-1 block">2 mins ago</span></div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="bg-blue-50 p-2 rounded-full"><i data-lucide="truck" class="w-4 h-4 text-blue-600"></i></div>
+                                <div><p class="text-sm text-textMain font-semibold mb-1">Volunteer accepted a pickup</p><p class="text-sm text-textSecondary">John Doe accepted Vegetable Biryani.</p><span class="text-xs text-gray-400 mt-1 block">15 mins ago</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>

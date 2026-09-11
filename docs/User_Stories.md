@@ -1,7 +1,5 @@
 # User Stories
-
 ## ReFood Connect – Smart Food Waste Redistribution Platform
-
 ---
 
 ## Authentication
