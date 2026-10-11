@@ -15,7 +15,13 @@ class AuthService {
       password: hashedPassword,
       role
     });
-    return user;
+    const secret = process.env.JWT_SECRET || 'refood_connect_jwt_secret_key_2026';
+    const token = jwt.sign(
+      { id: user.id, role: user.role, name: user.name },
+      secret,
+      { expiresIn: '1d' }
+    );
+    return { user, token };
   }
 
   async login(email, password) {
@@ -27,12 +33,16 @@ class AuthService {
     if (!isValid) {
       throw new Error('Invalid email or password');
     }
+    const secret = process.env.JWT_SECRET || 'refood_connect_jwt_secret_key_2026';
     const token = jwt.sign(
       { id: user.id, role: user.role, name: user.name },
-      process.env.JWT_SECRET,
+      secret,
       { expiresIn: '1d' }
     );
-    return { token, user };
+    return {
+      token,
+      user: { id: user.id, name: user.name, email: user.email, role: user.role }
+    };
   }
 }
 

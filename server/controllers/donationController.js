@@ -2,6 +2,9 @@ const donationService = require('../services/donationService');
 
 exports.createDonation = async (req, res) => {
   try {
+    if (req.user.role !== 'donor' && req.user.role !== 'admin') {
+      return res.status(403).json({ error: 'Only donors can create donations' });
+    }
     const { foodDetails, quantity, expiryTime } = req.body;
     const donorId = req.user.id;
     const donation = await donationService.createDonation(donorId, foodDetails, quantity, expiryTime);
@@ -23,7 +26,15 @@ exports.getDonations = async (req, res) => {
 exports.updateDonation = async (req, res) => {
   try {
     const { id } = req.params;
-    const updates = req.body; // e.g., { status: 'Requested', ngoId: req.user.id }
+    const updates = req.body;
+
+    if (updates.status === 'Requested' && req.user.role !== 'ngo' && req.user.role !== 'admin') {
+      return res.status(403).json({ error: 'Only NGOs can request donations' });
+    }
+
+    if (['Accepted', 'Picked Up', 'Delivered'].includes(updates.status) && req.user.role !== 'volunteer' && req.user.role !== 'admin') {
+      return res.status(403).json({ error: 'Only volunteers can accept or update delivery tasks' });
+    }
     
     // Auto-assign user ids based on role and status change
     if (updates.status === 'Requested' && req.user.role === 'ngo') {

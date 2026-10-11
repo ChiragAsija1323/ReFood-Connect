@@ -17,6 +17,7 @@ const Login = () => {
       if (data.user.role === 'donor') navigate('/donor');
       else if (data.user.role === 'ngo') navigate('/ngo');
       else if (data.user.role === 'volunteer') navigate('/volunteer');
+      else if (data.user.role === 'admin') navigate('/admin');
     } catch (error) {
       alert(error.response?.data?.error || 'Login failed');
     }

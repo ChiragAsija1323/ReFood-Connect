@@ -5,11 +5,15 @@ import { useNavigate } from 'react-router-dom';
 const VolunteerDashboard = () => {
   const [tasks, setTasks] = useState([]);
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem('user')) || {};
 
   const fetchTasks = async () => {
-    const { data } = await axios.get('/donations');
-    setTasks(data);
+    try {
+      const { data } = await axios.get('/donations');
+      setTasks(data);
+    } catch (err) {
+      console.error('Failed to fetch tasks', err);
+    }
   };
 
   useEffect(() => {
@@ -17,8 +21,12 @@ const VolunteerDashboard = () => {
   }, []);
 
   const handleStatusUpdate = async (id, status) => {
-    await axios.put(`/donations/${id}`, { status });
-    fetchTasks();
+    try {
+      await axios.put(`/donations/${id}`, { status });
+      fetchTasks();
+    } catch (err) {
+      alert(err.response?.data?.error || 'Failed to update task status');
+    }
   };
 
   const logout = () => {

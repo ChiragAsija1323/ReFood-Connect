@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import DonorDashboard from './pages/DonorDashboard';
 import NGODashboard from './pages/NGODashboard';
 import VolunteerDashboard from './pages/VolunteerDashboard';
+import AdminDashboard from './pages/AdminDashboard';
 import './App.css';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
             <Route path="/donor" element={<DonorDashboard />} />
             <Route path="/ngo" element={<NGODashboard />} />
             <Route path="/volunteer" element={<VolunteerDashboard />} />
+            <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
         </main>
       </div>

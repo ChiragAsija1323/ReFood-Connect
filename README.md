@@ -170,12 +170,66 @@ This repository contains the design phase submissions for Digital Assignment 1 &
 - [Architecture PNG](./design/diagrams/Architecture.png)
 - [Software Design Document](./docs/Software_Design_Document.md)
 
+## 🧪 Quality Assurance, Testing & DA-3 Evidence
+
+ReFood Connect adheres to strict software verification standards as evaluated in Digital Assignment 3 (Review 3):
+
+### 1. Automated Integration & Regression Testing
+Tests are isolated from development databases using an in-memory SQLite driver (`sqlite::memory:`).
+
+```bash
+# Run complete test suite (27 tests across 4 suites)
+cd server
+npm test
+
+# Run dedicated regression test suite
+npm run test:regression
+```
+* **Status:** 27/27 Tests Passed (100% Pass Rate).
+* **Execution Time:** ~5.3 seconds.
+
+### 2. Mutation Testing (StrykerJS)
+Fault-injection mutation testing was performed on `server/services/donationService.js`:
+
+```bash
+cd server
+npx stryker run
+```
+* **Total Mutants Evaluated:** 131
+* **Mutants Killed:** 111 (✓)
+* **Covered Mutation Score:** **88.80%**
+* **Total Mutation Score:** **84.73%** (improved from 60.31% baseline)
+* **HTML Report:** `server/reports/mutation/mutation.html`
+
+### 3. Build & Containerization
+```bash
+# Frontend production build
+cd client
+npm run build
+
+# Docker Compose specification validation
+docker compose config
+```
+
+---
+
+## 📁 DA-3 Documentation & Deliverables
+
+- 📄 **[DA-3 Technical Evidence Report (Markdown)](./docs/DA3_Evidence_Report.md)**
+- 📕 **[DA-3 Technical Evidence Report (PDF)](./docs/DA3_Evidence_Report.pdf)**
+- 📄 **[DA-3 Final Project Report & Appendices (Markdown)](./docs/DA3_Project_Report.md)**
+- 📕 **[DA-3 Final Project Report & Appendices (PDF)](./docs/DA3_Project_Report.pdf)**
+- 🎤 **[Live Viva & Demonstration Script](./docs/VIVA_DEMO_GUIDE.md)**
+- 🏗️ **[Software Design Document (DA-2)](./docs/Software_Design_Document.md)**
+- 📐 **[Architecture Diagram (PNG)](./design/diagrams/Architecture.png)**
+
 ---
 
 ## Contributors
 
-Chirag Asija (24BDS1073)  
-Saanvi Gupta (24BDS1023)  
+* **Chirag Asija** (Registration No: `24BDS1073`)  
+* **Saanvi Gupta** (Registration No: `24BDS1023`)  
 
-**Software Engineering (BCSE301L)**  
-VIT Chennai
+**Course:** Software Engineering (`BCSE301L`)  
+**Institution:** Vellore Institute of Technology (VIT), Chennai Campus
+
