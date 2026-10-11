@@ -3,7 +3,7 @@ import sys
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
 from reportlab.platypus import (
-    SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak, KeepTogether, HRFlowable
+    SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak, KeepTogether, HRFlowable, Image as RLImage
 )
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.pdfgen import canvas
@@ -323,6 +323,11 @@ def generate_project_report_pdf():
     # 3. System Architecture
     story.append(Paragraph("3. System Architecture & Design Principles", styles['h1']))
     story.append(Paragraph("ReFood Connect implements a Layered Client-Server Architecture utilizing the Service Layer Pattern. The React 19 frontend is decoupled from the Express 5 backend via a centralized Axios instance. Business logic is strictly contained within service classes (authService, donationService, adminService), while Sequelize ORM abstracts database persistence across MySQL (production) and SQLite (in-memory test isolation).", styles['body']))
+    
+    if os.path.exists("design/diagrams/Architecture.png"):
+        story.append(Spacer(1, 6))
+        story.append(RLImage("design/diagrams/Architecture.png", width=480, height=270))
+        story.append(Spacer(1, 8))
 
     # 4. Design of Tests
     story.append(Paragraph("4. Design of Tests & Execution Results", styles['h1']))
@@ -336,19 +341,42 @@ def generate_project_report_pdf():
     story.append(Paragraph(test_summary_text, styles['code']))
 
     # 5. Appendices
-    story.append(Paragraph("5. Appendices", styles['h1']))
+    story.append(PageBreak())
+    story.append(Paragraph("5. Appendices & Technical Design Artifacts", styles['h1']))
     
     story.append(Paragraph("Appendix A: Software Requirements Specification (SRS)", styles['h2']))
     story.append(Paragraph("<b>Functional:</b> Role-based JWT authentication; surplus batch creation with expiry validation; NGO request claiming; volunteer sequential transit tracking; admin analytics. <br/><b>Non-Functional:</b> Sub-second test execution via in-memory SQLite; bcrypt password hashing; SQL injection prevention via ORM; Docker containerization.", styles['body']))
 
+    story.append(Spacer(1, 6))
     story.append(Paragraph("Appendix B: Data Flow Diagrams (DFD)", styles['h2']))
-    story.append(Paragraph("<b>Level 0:</b> Food Donors submit food listings; NGOs submit donation claims; Volunteers receive transport routes and submit delivery status; Administrators receive aggregated redistribution metrics.<br/><b>Level 1:</b> Decomposed into Process 1.0 (Auth & Session), Process 2.0 (Donation Creation), Process 3.0 (Donation Allocation), Process 4.0 (Delivery Transit Management), and Process 5.0 (Admin Governance).", styles['body']))
+    story.append(Paragraph("<b>Level 0 & Level 1 Data Flow:</b> Illustrates the decomposition of redistribution processes across entities, services, and the data store.", styles['body']))
+    if os.path.exists("design/diagram_renders/dfd_diagram.png"):
+        story.append(RLImage("design/diagram_renders/dfd_diagram.png", width=480, height=250))
+        story.append(Spacer(1, 8))
 
     story.append(Paragraph("Appendix C: Entity-Relationship Diagram (ERD)", styles['h2']))
-    story.append(Paragraph("<b>Users Entity:</b> id (PK), name, email (Unique), password (Hashed), role (donor|ngo|volunteer|admin).<br/><b>Donations Entity:</b> id (PK), donorId (FK -> Users.id), ngoId (FK -> Users.id), volunteerId (FK -> Users.id), foodDetails, quantity, expiryTime, status (Available|Requested|Accepted|Picked Up|Delivered).", styles['body']))
+    story.append(Paragraph("<b>Relational Schema:</b> Users (PK id, role) associated via 1:N relations with Donations (FK donorId, ngoId, volunteerId).", styles['body']))
+    if os.path.exists("design/diagram_renders/erd_diagram.png"):
+        story.append(RLImage("design/diagram_renders/erd_diagram.png", width=480, height=268))
+        story.append(Spacer(1, 8))
 
+    story.append(PageBreak())
     story.append(Paragraph("Appendix D: Unified Modeling Language (UML) Diagrams", styles['h2']))
-    story.append(Paragraph("<b>Use Cases:</b> Manage Donations, Claim Deliveries, View Admin Analytics.<br/><b>Sequence:</b> Donor posts -> NGO requests -> Volunteer accepts -> Volunteer picks up -> Volunteer delivers -> Status persisted in MySQL.<br/><b>Class Diagram:</b> Strict separation between Controllers, Services, and Models.", styles['body']))
+    
+    story.append(Paragraph("<b>D.1 UML Use Case Diagram:</b> System boundaries and actor interactions.", styles['body']))
+    if os.path.exists("design/diagram_renders/use_case_diagram.png"):
+        story.append(RLImage("design/diagram_renders/use_case_diagram.png", width=480, height=268))
+        story.append(Spacer(1, 8))
+
+    story.append(Paragraph("<b>D.2 UML Sequence Diagram:</b> End-to-end food donation lifecycle progression.", styles['body']))
+    if os.path.exists("design/diagram_renders/sequence_diagram.png"):
+        story.append(RLImage("design/diagram_renders/sequence_diagram.png", width=480, height=259))
+        story.append(Spacer(1, 8))
+
+    story.append(Paragraph("<b>D.3 UML Class Diagram:</b> Decoupled controllers, service layer, and models.", styles['body']))
+    if os.path.exists("design/diagram_renders/class_diagram.png"):
+        story.append(RLImage("design/diagram_renders/class_diagram.png", width=480, height=250))
+        story.append(Spacer(1, 8))
 
     story.append(Paragraph("Appendix E: Code Listing & Repository Link", styles['h2']))
     story.append(Paragraph("Official GitHub Repository: <b>https://github.com/ChiragAsija1323/ReFood-Connect</b><br/>All source code, Docker configs, test suites, and documentation are committed on branch <code>main</code>.", styles['body']))
