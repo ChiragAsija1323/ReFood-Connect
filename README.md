@@ -8,14 +8,6 @@
   <strong>Smart Food Waste Redistribution Platform</strong><br>
   <em>Connecting food donors with NGOs and volunteers to eliminate hunger and reduce food wastage.</em>
 </p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Frontend-React%20%7C%20Vite-blue" alt="React">
-  <img src="https://img.shields.io/badge/Backend-Node.js%20%7C%20Express-green" alt="Node">
-  <img src="https://img.shields.io/badge/Database-MySQL%20%7C%20Sequelize-orange" alt="MySQL">
-  <img src="https://img.shields.io/badge/Containerization-Docker-blueviolet" alt="Docker">
-</p>
-
 ---
 
 ## 📌 Project Overview
