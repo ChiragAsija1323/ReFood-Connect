@@ -8,7 +8,7 @@
   <strong>Smart Food Waste Redistribution Platform</strong><br>
   <em>Connecting food donors with NGOs and volunteers to eliminate hunger and reduce food wastage.</em>
 </p>
----
+
 
 ## 📌 Project Overview
 
