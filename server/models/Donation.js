@@ -48,6 +48,14 @@ const Donation = sequelize.define('Donation', {
     type: DataTypes.ENUM('Available', 'Requested', 'Accepted', 'Picked Up', 'Delivered'),
     defaultValue: 'Available',
   },
+  pickupOtp: {
+    type: DataTypes.STRING(4),
+    allowNull: true,
+  },
+  deliveryOtp: {
+    type: DataTypes.STRING(4),
+    allowNull: true,
+  },
 });
 
 User.hasMany(Donation, { foreignKey: 'donorId', as: 'donations' });

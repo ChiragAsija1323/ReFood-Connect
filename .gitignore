@@ -146,3 +146,6 @@ vite.config.ts.timestamp-*
 .stryker-tmp/
 server/reports/
 
+
+__pycache__/
+*.pyc

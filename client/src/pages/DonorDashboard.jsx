@@ -55,6 +55,15 @@ const DonorDashboard = () => {
               <strong>{d.foodDetails}</strong> - {d.quantity}
               <br/> Status: <span className="status">{d.status}</span>
               <br/> Expiry: {new Date(d.expiryTime).toLocaleString()}
+              {d.pickupOtp && (
+                <div style={{ marginTop: '8px' }}>
+                  <div className="otp-badge-container">
+                    <span className="otp-label">🔐 Pickup OTP:</span>
+                    <span className="otp-code">{d.pickupOtp}</span>
+                  </div>
+                  <span className="otp-hint">(Share this code with volunteer upon food handover)</span>
+                </div>
+              )}
             </li>
           ))}
         </ul>

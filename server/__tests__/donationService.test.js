@@ -33,10 +33,12 @@ describe('DonationService Direct Unit Tests (Mutation Killers)', () => {
     await expect(donationService.createDonation(donor.id, 'Food', '10', undefined)).rejects.toThrow('Expiry time is required');
   });
 
-  test('createDonation trims input strings properly', async () => {
+  test('createDonation trims input strings properly and generates 4-digit pickupOtp', async () => {
     const d = await donationService.createDonation(donor.id, '  Pulao  ', '  20 packs  ', new Date());
     expect(d.foodDetails).toBe('Pulao');
     expect(d.quantity).toBe('20 packs');
+    expect(d.pickupOtp).toBeDefined();
+    expect(d.pickupOtp).toHaveLength(4);
   });
 
   test('getDonationsByRole handles volunteer, admin and unknown roles', async () => {
@@ -63,23 +65,26 @@ describe('DonationService Direct Unit Tests (Mutation Killers)', () => {
     const d = await donationService.createDonation(donor.id, 'Rice', '10kg', new Date());
     // Current is Available: cannot accept, pick up, or deliver
     await expect(donationService.updateDonationStatus(d.id, { status: 'Accepted' })).rejects.toThrow("Cannot accept pickup for donation with status 'Available'. Must be 'Requested'.");
-    await expect(donationService.updateDonationStatus(d.id, { status: 'Picked Up' })).rejects.toThrow("Cannot mark picked up for donation with status 'Available'. Must be 'Accepted'.");
-    await expect(donationService.updateDonationStatus(d.id, { status: 'Delivered' })).rejects.toThrow("Cannot mark delivered for donation with status 'Available'. Must be 'Picked Up'.");
+    await expect(donationService.updateDonationStatus(d.id, { status: 'Picked Up', otp: d.pickupOtp })).rejects.toThrow("Cannot mark picked up for donation with status 'Available'. Must be 'Accepted'.");
+    await expect(donationService.updateDonationStatus(d.id, { status: 'Delivered', otp: '1234' })).rejects.toThrow("Cannot mark delivered for donation with status 'Available'. Must be 'Picked Up'.");
 
     // Transition to Requested
-    await donationService.updateDonationStatus(d.id, { status: 'Requested', ngoId: ngo.id });
+    const requested = await donationService.updateDonationStatus(d.id, { status: 'Requested', ngoId: ngo.id });
+    expect(requested.deliveryOtp).toHaveLength(4);
     await expect(donationService.updateDonationStatus(d.id, { status: 'Requested' })).rejects.toThrow("Cannot request donation with status 'Requested'. Must be 'Available'.");
-    await expect(donationService.updateDonationStatus(d.id, { status: 'Picked Up' })).rejects.toThrow("Cannot mark picked up for donation with status 'Requested'. Must be 'Accepted'.");
+    await expect(donationService.updateDonationStatus(d.id, { status: 'Picked Up', otp: d.pickupOtp })).rejects.toThrow("Cannot mark picked up for donation with status 'Requested'. Must be 'Accepted'.");
 
     // Transition to Accepted
     await donationService.updateDonationStatus(d.id, { status: 'Accepted', volunteerId: volunteer.id });
-    await expect(donationService.updateDonationStatus(d.id, { status: 'Delivered' })).rejects.toThrow("Cannot mark delivered for donation with status 'Accepted'. Must be 'Picked Up'.");
+    await expect(donationService.updateDonationStatus(d.id, { status: 'Delivered', otp: requested.deliveryOtp })).rejects.toThrow("Cannot mark delivered for donation with status 'Accepted'. Must be 'Picked Up'.");
 
-    // Transition to Picked Up
-    await donationService.updateDonationStatus(d.id, { status: 'Picked Up' });
+    // Digital Handshake verification for Picked Up
+    await expect(donationService.updateDonationStatus(d.id, { status: 'Picked Up', otp: 'wrong-otp' })).rejects.toThrow('Invalid Pickup OTP. Physical verification failed.');
+    await donationService.updateDonationStatus(d.id, { status: 'Picked Up', otp: d.pickupOtp });
 
-    // Transition to Delivered
-    const finalDonation = await donationService.updateDonationStatus(d.id, { status: 'Delivered' });
+    // Digital Handshake verification for Delivered
+    await expect(donationService.updateDonationStatus(d.id, { status: 'Delivered', otp: 'wrong-otp' })).rejects.toThrow('Invalid Delivery OTP. Physical verification failed.');
+    const finalDonation = await donationService.updateDonationStatus(d.id, { status: 'Delivered', otp: requested.deliveryOtp });
     expect(finalDonation.status).toBe('Delivered');
   });
 });

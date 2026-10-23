@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const NGODashboard = () => {
   const [donations, setDonations] = useState([]);
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem('user')) || {};
 
   const fetchDonations = async () => {
     const { data } = await axios.get('/donations');
@@ -17,8 +17,12 @@ const NGODashboard = () => {
   }, []);
 
   const handleRequest = async (id) => {
-    await axios.put(`/donations/${id}`, { status: 'Requested' });
-    fetchDonations();
+    try {
+      await axios.put(`/donations/${id}`, { status: 'Requested' });
+      fetchDonations();
+    } catch (err) {
+      alert(err.response?.data?.error || 'Failed to request donation');
+    }
   };
 
   const logout = () => {
@@ -53,6 +57,15 @@ const NGODashboard = () => {
             <li key={d.id}>
               <strong>{d.foodDetails}</strong> - {d.quantity}
               <br/> Status: <span className="status">{d.status}</span>
+              {d.deliveryOtp && (
+                <div style={{ marginTop: '8px' }}>
+                  <div className="otp-badge-container">
+                    <span className="otp-label">🔐 Delivery Handover OTP:</span>
+                    <span className="otp-code">{d.deliveryOtp}</span>
+                  </div>
+                  <span className="otp-hint">(Share this code with volunteer upon receiving the delivery)</span>
+                </div>
+              )}
             </li>
           ))}
         </ul>

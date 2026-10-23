@@ -1,5 +1,7 @@
 const { Donation, User } = require('../models');
 
+const generateOtp = () => Math.floor(1000 + Math.random() * 9000).toString();
+
 class DonationService {
   async createDonation(donorId, foodDetails, quantity, expiryTime) {
     if (!foodDetails || foodDetails.trim() === '') {
@@ -12,12 +14,15 @@ class DonationService {
       throw new Error('Expiry time is required');
     }
 
+    const pickupOtp = generateOtp();
+
     return await Donation.create({
       donorId,
       foodDetails: foodDetails.trim(),
       quantity: quantity.trim(),
       expiryTime,
-      status: 'Available'
+      status: 'Available',
+      pickupOtp,
     });
   }
 
@@ -54,6 +59,8 @@ class DonationService {
       if (donation.status !== 'Available') {
         throw new Error(`Cannot request donation with status '${donation.status}'. Must be 'Available'.`);
       }
+      // Generate delivery OTP when claimed by NGO
+      updates.deliveryOtp = generateOtp();
     } else if (updates.status === 'Accepted') {
       if (donation.status !== 'Requested') {
         throw new Error(`Cannot accept pickup for donation with status '${donation.status}'. Must be 'Requested'.`);
@@ -62,13 +69,27 @@ class DonationService {
       if (donation.status !== 'Accepted') {
         throw new Error(`Cannot mark picked up for donation with status '${donation.status}'. Must be 'Accepted'.`);
       }
+      // Digital Handshake: Physical Pickup OTP Verification
+      if (donation.pickupOtp) {
+        if (!updates.otp || updates.otp.toString().trim() !== donation.pickupOtp) {
+          throw new Error('Invalid Pickup OTP. Physical verification failed.');
+        }
+      }
     } else if (updates.status === 'Delivered') {
       if (donation.status !== 'Picked Up') {
         throw new Error(`Cannot mark delivered for donation with status '${donation.status}'. Must be 'Picked Up'.`);
       }
+      // Digital Handshake: Physical Delivery OTP Verification
+      if (donation.deliveryOtp) {
+        if (!updates.otp || updates.otp.toString().trim() !== donation.deliveryOtp) {
+          throw new Error('Invalid Delivery OTP. Physical verification failed.');
+        }
+      }
     }
     
-    return await donation.update(updates);
+    const updatePayload = { ...updates };
+    delete updatePayload.otp;
+    return await donation.update(updatePayload);
   }
 }
 

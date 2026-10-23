@@ -29,11 +29,19 @@ ReFood Connect bridges this logistical gap by connecting **Food Donors** with ve
 
 Our platform provides customized interfaces and workflows for five distinct user roles:
 
-- 🍽️ **Food Donors**: List surplus food batches with details on quantity, food type, expiry time, and pickup address. Track donation status from pickup through final delivery.
-- 🏢 **NGOs / Food Banks**: Discover available food donations within their vicinity, submit instant claim requests, and manage food distribution to communities in need.
-- 🚴 **Volunteers**: View nearby transport requests, accept pickup tasks, and update delivery statuses (*Available → Requested → Accepted → Picked Up → Delivered*).
+- 🍽️ **Food Donors**: List surplus food batches with details on quantity, food type, expiry time, and pickup address. Track donation status in real-time and provide a secure **Pickup OTP** to authorize food handover.
+- 🏢 **NGOs / Food Banks**: Discover available food donations within their vicinity, submit instant claim requests, and receive a secure **Delivery OTP** to verify actual food receipt.
+- 🚴 **Volunteers**: View nearby transport requests, accept pickup tasks, and complete transitions (*Available → Requested → Accepted → Picked Up → Delivered*) guarded by two-way OTP physical handshakes.
 - 🤝 **Beneficiaries**: Shelters, orphanages, and community kitchens that receive nutritious surplus meals through partnered NGOs.
 - 🛡️ **Administrators**: System-wide governance, verifying participating organizations, monitoring redistribution audit logs, and tracking platform metrics.
+
+---
+
+## 🔐 Digital Handshake Physical Verification (Dual-OTP)
+
+To prevent fraud, theft, and false delivery claims in real-world food rescue logistics, ReFood Connect enforces a **two-phase cryptographic digital handshake**:
+1. **Pickup Verification**: When a donor posts food, a unique 4-digit `pickupOtp` is generated. The volunteer must collect this code in person from the donor; the backend rejects transition to `Picked Up` unless the correct OTP is supplied.
+2. **Delivery Verification**: When an NGO claims the donation, a unique 4-digit `deliveryOtp` is generated for the shelter. Upon arrival, the volunteer inputs this code; the backend rejects transition to `Delivered` without matching verification.
 
 ---
 
@@ -62,7 +70,7 @@ ReFood Connect implements a **Layered Client-Server Architecture** using the Ser
 | **Backend** | Node.js, Express.js, JWT (JSON Web Tokens), Bcrypt.js |
 | **Database & ORM** | MySQL 8.0, Sequelize ORM |
 | **DevOps & Containers** | Docker, Docker Compose |
-| **Testing** | Jest, Supertest, SQLite (in-memory test harness) |
+| **Testing & CI** | Jest, Supertest, SQLite in-memory harness, GitHub Actions CI |
 | **UI/UX Design** | Figma, Draw.io |
 
 ---
@@ -116,7 +124,7 @@ The project includes an automated test suite integrated with GitHub Actions CI, 
 ```bash
 cd server
 
-# Run all test suites
+# Run all 29 integration & unit tests
 npm test
 
 # Run regression tests
@@ -145,8 +153,8 @@ ReFood-Connect/
 │   ├── middleware/         # JWT authentication & RBAC middleware
 │   ├── models/             # Sequelize data models (User, Donation)
 │   ├── routes/             # REST API endpoint definitions
-│   ├── services/           # Core business logic & state machines
-│   └── __tests__/          # Integration and regression test suites
+│   ├── services/           # Core business logic, OTP verification & state machines
+│   └── __tests__/          # Integration, unit, and regression test suites
 ├── design/                 # Architecture diagrams and UI wireframes
 ├── docs/                   # System design & requirements documentation
 ├── docker-compose.yml      # Multi-container Docker orchestration

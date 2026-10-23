@@ -103,6 +103,7 @@ const AdminDashboard = () => {
                     <th>Quantity</th>
                     <th>Expiry Time</th>
                     <th>Status</th>
+                    <th>OTP Handshake</th>
                     <th>Assigned NGO</th>
                     <th>Assigned Volunteer</th>
                   </tr>
@@ -121,13 +122,18 @@ const AdminDashboard = () => {
                             {d.status}
                           </span>
                         </td>
+                        <td>
+                          <span style={{ fontSize: '12px', fontFamily: 'monospace', color: '#475569' }}>
+                            P: <strong style={{ color: '#1d4ed8' }}>{d.pickupOtp || '-'}</strong> | D: <strong style={{ color: '#16a34a' }}>{d.deliveryOtp || '-'}</strong>
+                          </span>
+                        </td>
                         <td>{d.ngo?.name || '-'}</td>
                         <td>{d.volunteer?.name || '-'}</td>
                       </tr>
                     ))
                   ) : (
                     <tr>
-                      <td colSpan="8" style={{ textAlign: 'center' }}>No donation records found.</td>
+                      <td colSpan="9" style={{ textAlign: 'center' }}>No donation records found.</td>
                     </tr>
                   )}
                 </tbody>

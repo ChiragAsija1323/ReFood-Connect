@@ -5,6 +5,8 @@ const { sequelize, User, Donation } = require('../models');
 let donorToken, ngoToken, volunteerToken;
 let donorUser, ngoUser, volunteerUser;
 let createdDonationId;
+let createdPickupOtp;
+let createdDeliveryOtp;
 
 beforeAll(async () => {
   await sequelize.sync({ force: true });
@@ -45,7 +47,7 @@ afterAll(async () => {
 });
 
 describe('Donations End-to-End Workflow Integration Tests', () => {
-  test('POST /api/donations - Food Donor creates a surplus food listing (Status: Available)', async () => {
+  test('POST /api/donations - Food Donor creates a surplus food listing (Status: Available & generates Pickup OTP)', async () => {
     const res = await request(app)
       .post('/api/donations')
       .set('Authorization', `Bearer ${donorToken}`)
@@ -60,7 +62,10 @@ describe('Donations End-to-End Workflow Integration Tests', () => {
     expect(res.body.foodDetails).toBe('40 Packets of Biryani & Curd Rice');
     expect(res.body.status).toBe('Available');
     expect(res.body.donorId).toBe(donorUser.id);
+    expect(res.body).toHaveProperty('pickupOtp');
+    expect(res.body.pickupOtp).toHaveLength(4);
     createdDonationId = res.body.id;
+    createdPickupOtp = res.body.pickupOtp;
   });
 
   test('GET /api/donations - NGO retrieves available food donation listings', async () => {
@@ -74,7 +79,7 @@ describe('Donations End-to-End Workflow Integration Tests', () => {
     expect(res.body.some(d => d.id === createdDonationId)).toBe(true);
   });
 
-  test('PUT /api/donations/:id - NGO claims/requests the donation (Status transitions to Requested)', async () => {
+  test('PUT /api/donations/:id - NGO claims/requests the donation (Status transitions to Requested & generates Delivery OTP)', async () => {
     const res = await request(app)
       .put(`/api/donations/${createdDonationId}`)
       .set('Authorization', `Bearer ${ngoToken}`)
@@ -83,6 +88,9 @@ describe('Donations End-to-End Workflow Integration Tests', () => {
     expect(res.statusCode).toBe(200);
     expect(res.body.status).toBe('Requested');
     expect(res.body.ngoId).toBe(ngoUser.id);
+    expect(res.body).toHaveProperty('deliveryOtp');
+    expect(res.body.deliveryOtp).toHaveLength(4);
+    createdDeliveryOtp = res.body.deliveryOtp;
   });
 
   test('PUT /api/donations/:id - Volunteer accepts the transport task (Status transitions to Accepted)', async () => {
@@ -96,21 +104,41 @@ describe('Donations End-to-End Workflow Integration Tests', () => {
     expect(res.body.volunteerId).toBe(volunteerUser.id);
   });
 
-  test('PUT /api/donations/:id - Volunteer updates transit to Picked Up', async () => {
+  test('PUT /api/donations/:id - Volunteer fails to update transit without valid Pickup OTP', async () => {
     const res = await request(app)
       .put(`/api/donations/${createdDonationId}`)
       .set('Authorization', `Bearer ${volunteerToken}`)
-      .send({ status: 'Picked Up' });
+      .send({ status: 'Picked Up', otp: '0000' });
+
+    expect(res.statusCode).toBe(400);
+    expect(res.body.error).toMatch(/Invalid Pickup OTP/i);
+  });
+
+  test('PUT /api/donations/:id - Volunteer successfully updates transit to Picked Up with valid Pickup OTP', async () => {
+    const res = await request(app)
+      .put(`/api/donations/${createdDonationId}`)
+      .set('Authorization', `Bearer ${volunteerToken}`)
+      .send({ status: 'Picked Up', otp: createdPickupOtp });
 
     expect(res.statusCode).toBe(200);
     expect(res.body.status).toBe('Picked Up');
   });
 
-  test('PUT /api/donations/:id - Volunteer confirms final handover to Delivered', async () => {
+  test('PUT /api/donations/:id - Volunteer fails to mark delivered without valid Delivery OTP', async () => {
     const res = await request(app)
       .put(`/api/donations/${createdDonationId}`)
       .set('Authorization', `Bearer ${volunteerToken}`)
-      .send({ status: 'Delivered' });
+      .send({ status: 'Delivered', otp: '9999' });
+
+    expect(res.statusCode).toBe(400);
+    expect(res.body.error).toMatch(/Invalid Delivery OTP/i);
+  });
+
+  test('PUT /api/donations/:id - Volunteer confirms final handover to Delivered with valid Delivery OTP', async () => {
+    const res = await request(app)
+      .put(`/api/donations/${createdDonationId}`)
+      .set('Authorization', `Bearer ${volunteerToken}`)
+      .send({ status: 'Delivered', otp: createdDeliveryOtp });
 
     expect(res.statusCode).toBe(200);
     expect(res.body.status).toBe('Delivered');
