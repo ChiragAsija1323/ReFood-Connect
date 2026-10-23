@@ -1,0 +1,75 @@
+name: CI Pipeline - Build & Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  backend-tests:
+    name: Backend Integration & Regression Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js v20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: server/package.json
+
+      - name: Install Backend Dependencies
+        run: |
+          cd server
+          npm install
+
+      - name: Execute Automated Test Suite (Jest + Supertest)
+        run: |
+          cd server
+          npm test
+
+  frontend-build:
+    name: Frontend Build & Verification
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js v20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: client/package.json
+
+      - name: Install Frontend Dependencies
+        run: |
+          cd client
+          npm install
+
+      - name: Build Production Assets (Vite)
+        run: |
+          cd client
+          npm run build
+
+  docker-compose-validate:
+    name: Docker Compose Specification Validation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Environment File for Validation
+        run: |
+          if [ ! -f server/.env ]; then
+            cp server/.env.example server/.env
+          fi
+
+      - name: Validate Docker Compose Configuration
+        run: docker compose config

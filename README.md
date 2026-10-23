@@ -9,6 +9,13 @@
   <em>Connecting food donors with NGOs and volunteers to eliminate hunger and reduce food wastage.</em>
 </p>
 
+<p align="center">
+  <a href="https://github.com/ChiragAsija1323/ReFood-Connect/actions/workflows/ci.yml">
+    <img src="https://github.com/ChiragAsija1323/ReFood-Connect/actions/workflows/ci.yml/badge.svg" alt="CI Pipeline Status" />
+  </a>
+</p>
+
+---
 
 ## 📌 Project Overview
 
@@ -102,9 +109,9 @@ npm run dev
 
 ---
 
-## 🧪 Testing
+## 🧪 Testing & Continuous Integration (CI)
 
-The backend includes an automated test suite covering user authentication, donation lifecycle transitions, role-based authorization, and database persistence.
+The project includes an automated test suite integrated with GitHub Actions CI, covering user authentication, donation lifecycle transitions, role-based authorization, and database persistence.
 
 ```bash
 cd server
@@ -122,6 +129,9 @@ npm run test:regression
 
 ```text
 ReFood-Connect/
+├── .github/
+│   └── workflows/
+│       └── ci.yml          # Automated GitHub Actions CI pipeline
 ├── client/                 # React.js frontend application
 │   ├── public/             # Static assets (brand logo, icons)
 │   └── src/
