@@ -1,0 +1,240 @@
+<mxfile host="Electron" modified="2026-10-24T00:00:00.000Z" agent="Mozilla/5.0" version="22.0.0" type="device">
+  <diagram id="refood-architecture-enhanced" name="High-Level Architecture (Enhanced)">
+    <mxGraphModel dx="1600" dy="1100" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1150" math="0" shadow="0" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- TITLE SECTION -->
+        <mxCell id="title1" value="ReFood Connect" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=32;fontStyle=1;fontColor=#16A34A;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="350" y="20" width="500" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="title2" value="High-Level Software Architecture" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=22;fontStyle=1;fontColor=#1F2937;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="350" y="60" width="500" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="title3" value="Layered Architecture with Security &amp; State Management Engine" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=15;fontColor=#64748B;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="350" y="90" width="500" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- 01 USERS / ROLES -->
+        <mxCell id="user_label" value="&lt;b&gt;01 USERS / STAKEHOLDER ROLES&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#64748B;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="490" y="125" width="220" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="user1" value="Food Donor" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#16A34A;fontColor=#1F2937;fontStyle=1;fontSize=14;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="210" y="155" width="130" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="user2" value="NGO / Food Bank" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#16A34A;fontColor=#1F2937;fontStyle=1;fontSize=14;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="360" y="155" width="130" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="user3" value="Volunteer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#16A34A;fontColor=#1F2937;fontStyle=1;fontSize=14;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="510" y="155" width="130" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="user4" value="Beneficiary" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#16A34A;fontColor=#1F2937;fontStyle=1;fontSize=14;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="660" y="155" width="130" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="user5" value="Administrator" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#16A34A;fontColor=#1F2937;fontStyle=1;fontSize=14;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="810" y="155" width="130" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- 02 PRESENTATION LAYER -->
+        <mxCell id="layer_pres" value="&lt;b&gt;02 PRESENTATION LAYER (React.js + Vite)&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-weight:normal;font-size:14px;color:#64748B;&quot;&gt;Responsive Client-Side Interface &amp; Dashboards&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF3;strokeColor=#D1D5DB;align=center;verticalAlign=top;spacingTop=15;fontSize=18;fontColor=#1F2937;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="180" y="235" width="790" height="115" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="p1" value="Authentication" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;fontColor=#1F2937;fontSize=14;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="200" y="290" width="135" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="p2" value="Donor Dashboard" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;fontColor=#1F2937;fontSize=14;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="350" y="290" width="135" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="p3" value="NGO Dashboard" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;fontColor=#1F2937;fontSize=14;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="500" y="290" width="135" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="p4" value="Volunteer Dashboard" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;fontColor=#1F2937;fontSize=14;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="650" y="290" width="145" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="p5" value="Admin Dashboard" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;fontColor=#1F2937;fontSize=14;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="810" y="290" width="140" height="42" as="geometry" />
+        </mxCell>
+
+        <!-- 03 API LAYER -->
+        <mxCell id="layer_api" value="&lt;b&gt;03 APPLICATION / REST API LAYER (Node.js + Express.js)&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-weight:normal;font-size:14px;color:#64748B;&quot;&gt;RESTful Endpoint Routing, Controllers &amp; Payload Handling&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1F5F9;strokeColor=#D1D5DB;align=center;verticalAlign=top;spacingTop=15;fontSize=18;fontColor=#1F2937;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="180" y="390" width="790" height="115" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="a1" value="Authentication API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;fontColor=#1F2937;fontSize=14;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="200" y="445" width="135" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" value="Donation API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;fontColor=#1F2937;fontSize=14;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="350" y="445" width="135" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" value="Request API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;fontColor=#1F2937;fontSize=14;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="500" y="445" width="135" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="a4" value="Delivery API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;fontColor=#1F2937;fontSize=14;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="650" y="445" width="135" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="a5" value="Admin API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;fontColor=#1F2937;fontSize=14;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="800" y="445" width="150" height="42" as="geometry" />
+        </mxCell>
+
+        <!-- 04 BUSINESS LOGIC LAYER -->
+        <mxCell id="layer_biz" value="&lt;b&gt;04 BUSINESS LOGIC &amp; SERVICES LAYER&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-weight:normal;font-size:14px;color:#64748B;&quot;&gt;Core Domain Logic, State Machine &amp; Handshake Verification&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#D1D5DB;align=center;verticalAlign=top;spacingTop=15;fontSize=18;fontColor=#1F2937;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="180" y="545" width="790" height="160" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="b1" value="Authentication Service" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;fontColor=#1F2937;fontSize=14;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="200" y="605" width="170" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="b2" value="Donation Service" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;fontColor=#1F2937;fontSize=14;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="385" y="605" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="b3" value="Request &amp; Delivery Service" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;fontColor=#1F2937;fontSize=14;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="550" y="605" width="185" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="b4" value="User / Admin Service" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;fontColor=#1F2937;fontSize=14;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="750" y="605" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="b5" value="&lt;b&gt;Finite State Machine &amp; Dual-OTP Engine&lt;/b&gt; (Available → Requested → Accepted → Picked Up → Delivered)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#F59E0B;fontColor=#92400E;fontSize=13;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="200" y="655" width="700" height="36" as="geometry" />
+        </mxCell>
+
+        <!-- 05 DATA ACCESS LAYER -->
+        <mxCell id="layer_data" value="&lt;b&gt;05 DATA ACCESS LAYER (Sequelize ORM)&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-weight:normal;font-size:14px;color:#64748B;&quot;&gt;Database Abstraction, Parameterized SQL Queries &amp; Model Relational Associations&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFBEB;strokeColor=#D1D5DB;align=center;verticalAlign=center;fontSize=17;fontColor=#1F2937;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="210" y="745" width="730" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- 06 DATABASE -->
+        <mxCell id="layer_db" value="&lt;b&gt;06 MYSQL 8.0 DATABASE&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;span style=&quot;font-weight:normal;font-size:14px;color:#64748B;&quot;&gt;Persistent Relational Storage&lt;br&gt;(Users, Donations, OTP Handshake Audit, Roles)&lt;/span&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#F8FAFC;strokeColor=#D1D5DB;align=center;verticalAlign=top;spacingTop=20;fontSize=16;fontColor=#1F2937;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="425" y="865" width="300" height="130" as="geometry" />
+        </mxCell>
+
+        <!-- DEPLOYMENT ENVIRONMENT (DOCKER & CI/CD) -->
+        <mxCell id="docker_env" value="&lt;b&gt;DEPLOYMENT &amp; CI/CD AUTOMATION&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-weight:normal;font-size:14px;color:#64748B;&quot;&gt;Containerization &amp; Automated Pipeline&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;dashed=1;dashPattern=1 4;strokeWidth=2;align=center;verticalAlign=top;spacingTop=16;fontSize=15;fontColor=#1F2937;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="1010" y="140" width="370" height="225" as="geometry" />
+        </mxCell>
+        <mxCell id="d1" value="Docker Container: Frontend (Vite :5173)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;fontColor=#1F2937;fontSize=13;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="1035" y="195" width="320" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="d2" value="Docker Container: Backend API (:8000)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;fontColor=#1F2937;fontSize=13;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="1035" y="235" width="320" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="d3" value="Docker Container: MySQL 8.0 (:3306)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;fontColor=#1F2937;fontSize=13;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="1035" y="275" width="320" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="d4" value="GitHub Actions CI: Automated Testing &amp; Build" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#10B981;fontColor=#065F46;fontStyle=1;fontSize=13;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="1035" y="315" width="320" height="34" as="geometry" />
+        </mxCell>
+
+        <!-- SECURITY & STATE MANAGEMENT ENGINE (NEW EXPLICIT BOX) -->
+        <mxCell id="sec_engine" value="&lt;b&gt;SECURITY &amp; STATE MANAGEMENT&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-weight:normal;font-size:13px;color:#64748B;&quot;&gt;Platform Governance, Encryption &amp; Handshake&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#4F46E5;strokeWidth=2;align=center;verticalAlign=top;spacingTop=16;fontSize=16;fontColor=#1F2937;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="1010" y="390" width="370" height="395" as="geometry" />
+        </mxCell>
+        <mxCell id="sec1" value="Stateless JWT Authentication (Bearer Tokens)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEF2FF;strokeColor=#818CF8;fontColor=#312E81;fontSize=13;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="1035" y="445" width="320" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="sec2" value="Bcrypt Salted Password Hashing" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEF2FF;strokeColor=#818CF8;fontColor=#312E81;fontSize=13;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="1035" y="490" width="320" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="sec3" value="Role-Based Access Control (RBAC Guards)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEF2FF;strokeColor=#818CF8;fontColor=#312E81;fontSize=13;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="1035" y="535" width="320" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="sec4" value="Finite State Machine (FSM) Lifecycle Guard&#xa;(Strict State Sequencing &amp; Phase-Skip Prevention)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#F59E0B;fontColor=#92400E;fontStyle=1;fontSize=12;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="1035" y="580" width="320" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="sec5" value="Digital Handshake Physical Verification&#xa;(Donor Pickup OTP &amp; NGO Delivery OTP)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#10B981;fontColor=#065F46;fontStyle=1;fontSize=12;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="1035" y="632" width="320" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="sec6" value="Input Validation &amp; Boundary Sanitization" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;fontColor=#1F2937;fontSize=13;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="1035" y="685" width="320" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="sec7" value="Admin Audit Trail &amp; Redistribution Governance" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;fontColor=#1F2937;fontSize=13;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="1035" y="730" width="320" height="36" as="geometry" />
+        </mxCell>
+
+        <!-- LEGEND -->
+        <mxCell id="legend_box" value="&lt;b&gt;Architecture Legend&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;align=left;verticalAlign=top;spacingLeft=15;spacingTop=10;fontSize=14;fontColor=#1F2937;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="1010" y="865" width="370" height="130" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="leg_arr1" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#6B7280;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1030" y="905" as="sourcePoint" />
+            <mxPoint x="1080" y="905" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="leg_txt1" value="HTTP REST / Layered Data Flow" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontColor=#1F2937;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="1095" y="895" width="220" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="leg_arr2" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#818CF8;strokeWidth=2;dashed=1;dashPattern=1 4;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1030" y="935" as="sourcePoint" />
+            <mxPoint x="1080" y="935" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="leg_txt2" value="Security &amp; State Enforcement" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontColor=#1F2937;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="1095" y="925" width="220" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="leg_arr3" value="" style="endArrow=none;html=1;rounded=0;strokeColor=#D1D5DB;strokeWidth=2;dashed=1;dashPattern=1 4;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1030" y="965" as="sourcePoint" />
+            <mxPoint x="1080" y="965" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="leg_txt3" value="Docker Deployment Boundary" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontColor=#1F2937;fontFamily=Inter, Arial, sans-serif;" vertex="1" parent="1">
+          <mxGeometry x="1095" y="955" width="220" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- MAIN FLOW ARROWS -->
+        <mxCell id="arr_u1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.12;entryY=0;endArrow=classic;strokeColor=#6B7280;strokeWidth=2;" edge="1" parent="1" source="user1" target="layer_pres">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr_u2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.31;entryY=0;endArrow=classic;strokeColor=#6B7280;strokeWidth=2;" edge="1" parent="1" source="user2" target="layer_pres">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr_u3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;endArrow=classic;strokeColor=#6B7280;strokeWidth=2;" edge="1" parent="1" source="user3" target="layer_pres">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr_u4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.69;entryY=0;endArrow=classic;strokeColor=#6B7280;strokeWidth=2;" edge="1" parent="1" source="user4" target="layer_pres">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr_u5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.88;entryY=0;endArrow=classic;strokeColor=#6B7280;strokeWidth=2;" edge="1" parent="1" source="user5" target="layer_pres">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="arr_p2a" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;endArrow=classic;strokeColor=#6B7280;strokeWidth=2;" edge="1" parent="1" source="layer_pres" target="layer_api">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_p2a" value="&lt;b&gt;HTTP / REST API&lt;/b&gt;&lt;br&gt;Axios Client" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=13;fontColor=#1F2937;labelBackgroundColor=#FFFFFF;fontFamily=Inter, Arial, sans-serif;" vertex="1" connectable="0" parent="arr_p2a">
+          <mxGeometry x="-0.15" y="0" relative="1" as="geometry">
+            <mxPoint x="75" y="5" as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="arr_a2b" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;endArrow=classic;strokeColor=#6B7280;strokeWidth=2;" edge="1" parent="1" source="layer_api" target="layer_biz">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="arr_b2d" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;endArrow=classic;strokeColor=#6B7280;strokeWidth=2;" edge="1" parent="1" source="layer_biz" target="layer_data">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="arr_d2db" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;entryPerimeter=0;endArrow=classic;strokeColor=#6B7280;strokeWidth=2;" edge="1" parent="1" source="layer_data" target="layer_db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- SECURITY & CROSS-CUTTING CONNECTIONS -->
+        <mxCell id="arr_sec1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.2;endArrow=classic;strokeColor=#818CF8;strokeWidth=2;dashed=1;dashPattern=1 4;" edge="1" parent="1" source="layer_api" target="sec_engine">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr_sec2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.65;endArrow=classic;strokeColor=#818CF8;strokeWidth=2;dashed=1;dashPattern=1 4;" edge="1" parent="1" source="layer_biz" target="sec_engine">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
